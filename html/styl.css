@@ -1,0 +1,400 @@
+/* MovieTracker – responzívne rozloženie (zadanie 4. týždeň) */
+
+
+*, *::before, *::after { box-sizing: border-box; }
+
+:root {
+    --bg: #f6f5f5;
+    --surface: #ffffff;
+    --text: #1d2330;
+    --muted: #606a7d;
+    --line: #dedbdb;
+    --border: #a39d9d;
+    --primary: #b3202a;
+    --star: #c88a00;
+    --danger: #b3261e;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+}
+
+h1, h2, h3 { line-height: 1.25; margin: 0 0 .5rem; }
+p { margin: 0 0 .75rem; }
+
+.container {
+    width: min(1200px, 100% - 2rem);
+    margin-inline: auto;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+}
+
+:focus-visible { outline: 2px solid #3b82f6; outline-offset: 2px; }
+
+/* ---------- Tlačidlá a formulárové prvky ---------- */
+.btn {
+    display: inline-block;
+    padding: .5rem 1rem;
+    border: 1.5px solid var(--primary);
+    border-radius: 6px;
+    background: var(--surface);
+    color: var(--primary);
+    font: inherit;
+    font-size: .9rem;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+}
+.btn:hover { background: #fbeceb; }
+.btn-primary { background: var(--primary); color: #fff; }
+.btn-primary:hover { background: #8f1a22; }
+.btn-small { padding: .3rem .7rem; font-size: .8rem; }
+.btn-danger { border-color: var(--danger); color: var(--danger); }
+
+input, select {
+    font: inherit;
+    padding: .45rem .7rem;
+    border: 1.5px solid var(--border);
+    border-radius: 6px;
+    background: var(--surface);
+    color: var(--text);
+    max-width: 100%;
+}
+
+/* ---------- Hlavička ---------- */
+.site-header { background: var(--primary); color: #fff; }
+
+.site-header .container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding-block: .75rem;
+    flex-wrap: wrap;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #fff;
+    text-decoration: none;
+}
+
+.logo {
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-items: center;
+    border-radius: 8px;
+    background: #fff;
+    color: var(--primary);
+    font-size: .95rem;
+    font-weight: 800;
+}
+
+.menu {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.main-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: .25rem;
+}
+
+.main-nav a {
+    display: block;
+    padding: .5rem .9rem;
+    border-radius: 6px;
+    color: #ffe3e1;
+    text-decoration: none;
+}
+.main-nav a:hover { background: rgba(255, 255, 255, .14); }
+.main-nav a[aria-current="page"] { background: #fff; color: var(--primary); font-weight: 600; }
+
+.auth {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+
+.user-chip {
+    padding: .4rem .8rem;
+    border: 1.5px solid rgba(255, 255, 255, .6);
+    border-radius: 6px;
+    font-size: .9rem;
+}
+
+.site-header .btn { border-color: #fff; background: transparent; color: #fff; }
+.site-header .btn:hover { background: rgba(255, 255, 255, .14); }
+.site-header .btn-primary { background: #fff; color: var(--primary); }
+.site-header .btn-primary:hover { background: #fde8e7; }
+
+/* hamburger (bez JavaScriptu – checkbox hack) */
+.burger, .burger-toggle { display: none; }
+
+/* ---------- Hlavný obsah ---------- */
+main { flex: 1; padding-block: 1.5rem 2.5rem; }
+
+.page-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+.page-head h1 { margin: 0; font-size: 1.8rem; }
+
+.card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 1rem;
+}
+
+.placeholder {
+    padding: 2.5rem 1rem;
+    border: 2px dashed #aab1c0;
+    border-radius: 10px;
+    text-align: center;
+    color: var(--muted);
+    background: repeating-linear-gradient(45deg, #f9fafc, #f9fafc 12px, #f1f3f8 12px, #f1f3f8 24px);
+}
+.placeholder strong { display: block; font-size: 1.4rem; color: var(--text); }
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+/* ---------- Stránka „Môj zoznam“ ---------- */
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+.stat span { display: block; color: var(--muted); font-size: .85rem; }
+.stat strong { font-size: 1.6rem; }
+
+.toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .75rem;
+    margin-bottom: 1rem;
+}
+
+.tabs { display: flex; flex-wrap: wrap; gap: .4rem; }
+
+.tab {
+    padding: .45rem .9rem;
+    border: 1.5px solid var(--border);
+    border-radius: 6px;
+    background: var(--surface);
+    font: inherit;
+    font-size: .9rem;
+    cursor: pointer;
+}
+.tab.active { background: var(--primary); border-color: var(--primary); color: #fff; }
+
+.filters { margin-left: auto; display: flex; flex-wrap: wrap; gap: .5rem; }
+.filters input { width: 240px; }
+
+.movie-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: .75rem;
+}
+
+.movie {
+    display: grid;
+    grid-template-columns: 64px minmax(0, 1.2fr) 160px 150px minmax(0, 1.5fr) auto;
+    grid-template-areas: "poster info status rating note actions";
+    align-items: center;
+    gap: 1rem;
+    padding: .75rem 1rem;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+}
+
+.poster {
+    grid-area: poster;
+    width: 64px;
+    height: 92px;
+    border: 1.5px solid #aab1c0;
+    border-radius: 6px;
+    background:
+        linear-gradient(to top right, transparent calc(50% - 1px), #b5bccb 50%, transparent calc(50% + 1px)),
+        linear-gradient(to top left, transparent calc(50% - 1px), #b5bccb 50%, transparent calc(50% + 1px)),
+        #f3f4f8;
+}
+
+.info { grid-area: info; }
+.info h2 { margin: 0; font-size: 1.05rem; }
+.year { color: var(--muted); font-size: .9rem; font-weight: 400; }
+
+.chips {
+    list-style: none;
+    margin: .4rem 0 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: .35rem;
+}
+.chip {
+    padding: .05rem .6rem;
+    border: 1px solid #aab1c0;
+    border-radius: 999px;
+    color: var(--muted);
+    font-size: .75rem;
+}
+
+.status { grid-area: status; }
+.status select { width: 100%; }
+
+.rating { grid-area: rating; white-space: nowrap; }
+.stars { color: var(--star); font-size: 1.2rem; letter-spacing: 2px; }
+.stars .off { color: #c3c8d3; }
+.rating small { margin-left: .4rem; color: var(--muted); }
+
+.note-field { grid-area: note; }
+.note-field input { width: 100%; }
+
+.actions { grid-area: actions; display: flex; flex-direction: column; gap: .4rem; }
+
+.pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1rem;
+    color: var(--muted);
+    font-size: .9rem;
+}
+.pagination ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: .3rem; }
+.pagination a {
+    display: block;
+    padding: .35rem .7rem;
+    border: 1.5px solid var(--border);
+    border-radius: 6px;
+    background: var(--surface);
+    color: var(--text);
+    text-decoration: none;
+}
+.pagination a[aria-current="page"] { background: var(--primary); border-color: var(--primary); color: #fff; }
+
+/* ---------- Pätička ---------- */
+.site-footer { background: #e4e7ee; border-top: 1px solid var(--line); color: var(--muted); font-size: .9rem; }
+.site-footer .container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding-block: 1rem;
+}
+.site-footer ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 1rem; }
+.site-footer a { color: inherit; }
+
+/* ================= Responzívnosť ================= */
+
+/* Tablet a menší notebook */
+@media (max-width: 1024px) {
+    .movie {
+        grid-template-columns: 64px minmax(0, 1fr) 160px 150px;
+        grid-template-areas:
+            "poster info   status rating"
+            "note   note   note   actions";
+    }
+    .actions { flex-direction: row; justify-content: flex-end; }
+}
+
+@media (max-width: 900px) {
+    .card-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* Mobil – navigácia sa skryje za tlačidlo Menu */
+@media (max-width: 768px) {
+    .burger {
+        display: inline-block;
+        margin-left: auto;
+        padding: .4rem .8rem;
+        border: 1.5px solid #fff;
+        border-radius: 6px;
+        cursor: pointer;
+        user-select: none;
+    }
+    .burger-toggle {
+        display: block;
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        opacity: 0;
+    }
+    .burger-toggle:focus-visible + .burger { outline: 2px solid #fff; outline-offset: 2px; }
+
+    .menu {
+        display: none;
+        flex-basis: 100%;
+        flex-direction: column;
+        align-items: stretch;
+        gap: .75rem;
+    }
+    .burger-toggle:checked ~ .menu { display: flex; }
+
+    .main-nav ul { flex-direction: column; }
+    .auth { margin-left: 0; }
+    .auth .btn, .auth .user-chip { flex: 1; text-align: center; }
+
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .filters { margin-left: 0; width: 100%; }
+    .filters input, .filters select { flex: 1 1 100%; width: 100%; }
+}
+
+/* Malý mobil */
+@media (max-width: 640px) {
+    .card-grid { grid-template-columns: 1fr; }
+    .page-head h1 { font-size: 1.5rem; }
+    .page-head .btn { width: 100%; }
+
+    .movie {
+        grid-template-columns: 64px minmax(0, 1fr);
+        grid-template-areas:
+            "poster info"
+            "status status"
+            "rating rating"
+            "note   note"
+            "actions actions";
+    }
+    .actions .btn { flex: 1; }
+    .pagination { justify-content: center; }
+}

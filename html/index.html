@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MovieTracker – Základné rozloženie</title>
+    <link rel="stylesheet" href="styl.css">
+</head>
+<body>
+
+<header class="site-header">
+    <div class="container">
+        <a class="brand" href="index.html">
+            <span class="logo" aria-hidden="true">MT</span>
+            <span>MovieTracker</span>
+        </a>
+
+        <input type="checkbox" id="burger" class="burger-toggle" aria-label="Zobraziť menu">
+        <label for="burger" class="burger">☰ Menu</label>
+
+        <div class="menu">
+            <nav class="main-nav" aria-label="Hlavná navigácia">
+                <ul>
+                    <li><a href="index.html" aria-current="page">Katalóg</a></li>
+                    <li><a href="moj-zoznam.html">Môj zoznam</a></li>
+                    <li><a href="#">Profil</a></li>
+                </ul>
+            </nav>
+            <div class="auth">
+                <a class="btn" href="#">Prihlásiť sa</a>
+                <a class="btn btn-primary" href="#">Registrovať</a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main class="container">
+    <div class="page-head">
+        <h1>Obsah stránky</h1>
+    </div>
+
+    <section aria-labelledby="ph-title">
+        <div class="placeholder">
+            <strong id="ph-title">OBSAH STRÁNKY</strong>
+            <p>Placeholder – obsah sa mení podľa zvolenej stránky.</p>
+        </div>
+    </section>
+
+    <section aria-label="Ukážkové sekcie">
+        <div class="card-grid">
+            <article class="card">
+                <h2>Sekcia 1</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.</p>
+            </article>
+            <article class="card">
+                <h2>Sekcia 2</h2>
+                <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>
+            </article>
+            <article class="card">
+                <h2>Sekcia 3</h2>
+                <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla.</p>
+            </article>
+        </div>
+    </section>
+</main>
+
+<footer class="site-footer">
+    <div class="container">
+        <span>© 2026 MovieTracker</span>
+        <ul>
+            <li><a href="#">O projekte</a></li>
+            <li><a href="#">Kontakt</a></li>
+            <li><a href="#">Podmienky použitia</a></li>
+        </ul>
+    </div>
+</footer>
+
+</body>
+</html>

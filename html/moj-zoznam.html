@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MovieTracker – Môj zoznam</title>
+    <link rel="stylesheet" href="styl.css">
+</head>
+<body>
+
+<header class="site-header">
+    <div class="container">
+        <a class="brand" href="index.html">
+            <span class="logo" aria-hidden="true">MT</span>
+            <span>MovieTracker</span>
+        </a>
+
+        <input type="checkbox" id="burger" class="burger-toggle" aria-label="Zobraziť menu">
+        <label for="burger" class="burger">☰ Menu</label>
+
+        <div class="menu">
+            <nav class="main-nav" aria-label="Hlavná navigácia">
+                <ul>
+                    <li><a href="index.html">Katalóg</a></li>
+                    <li><a href="moj-zoznam.html" aria-current="page">Môj zoznam</a></li>
+                    <li><a href="#">Profil</a></li>
+                </ul>
+            </nav>
+            <div class="auth">
+                <span class="user-chip">👤 maxim</span>
+                <a class="btn" href="#">Odhlásiť</a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main class="container">
+    <div class="page-head">
+        <h1>Môj zoznam</h1>
+        <a class="btn btn-primary" href="index.html">+ Pridať film z katalógu</a>
+    </div>
+
+    <section class="stats" aria-label="Štatistiky">
+        <div class="card stat"><span>Videl som</span><strong>24</strong></div>
+        <div class="card stat"><span>Pozerám</span><strong>2</strong></div>
+        <div class="card stat"><span>Chcem vidieť</span><strong>11</strong></div>
+        <div class="card stat"><span>Priemerné hodnotenie</span><strong>4,1 / 5</strong></div>
+    </section>
+
+    <section aria-label="Zoznam filmov">
+        <div class="toolbar">
+            <div class="tabs" role="group" aria-label="Filter podľa stavu">
+                <button class="tab active" type="button">Všetky (37)</button>
+                <button class="tab" type="button">Chcem vidieť (11)</button>
+                <button class="tab" type="button">Pozerám (2)</button>
+                <button class="tab" type="button">Videl som (24)</button>
+            </div>
+            <div class="filters">
+                <label class="sr-only" for="search">Hľadať v zozname</label>
+                <input id="search" type="search" placeholder="🔍 Hľadať v zozname…">
+                <label class="sr-only" for="sort">Zoradiť podľa</label>
+                <select id="sort">
+                    <option>Zoradiť: Dátum pridania</option>
+                    <option>Zoradiť: Názov</option>
+                    <option>Zoradiť: Hodnotenie</option>
+                </select>
+            </div>
+        </div>
+
+        <ul class="movie-list">
+            <li class="movie">
+                <div class="poster" role="img" aria-label="Plagát filmu Inception"></div>
+                <div class="info">
+                    <h2>Inception <span class="year">(2010)</span></h2>
+                    <ul class="chips"><li class="chip">Sci-Fi</li><li class="chip">Triler</li></ul>
+                </div>
+                <div class="status">
+                    <label class="sr-only" for="st1">Stav</label>
+                    <select id="st1">
+                        <option>Chcem vidieť</option>
+                        <option>Pozerám</option>
+                        <option selected>Videl som</option>
+                    </select>
+                </div>
+                <div class="rating">
+                    <span class="stars" role="img" aria-label="5 z 5">★★★★★</span><small>5/5</small>
+                </div>
+                <div class="note-field">
+                    <label class="sr-only" for="n1">Poznámka</label>
+                    <input id="n1" type="text" value="Skvelý koniec, treba pozrieť znova.">
+                </div>
+                <div class="actions">
+                    <a class="btn btn-small" href="#">Detail</a>
+                    <button class="btn btn-small btn-danger" type="button">✕ Odstrániť</button>
+                </div>
+            </li>
+
+            <li class="movie">
+                <div class="poster" role="img" aria-label="Plagát filmu Dune: Part Two"></div>
+                <div class="info">
+                    <h2>Dune: Part Two <span class="year">(2024)</span></h2>
+                    <ul class="chips"><li class="chip">Sci-Fi</li><li class="chip">Dobrodružný</li></ul>
+                </div>
+                <div class="status">
+                    <label class="sr-only" for="st2">Stav</label>
+                    <select id="st2">
+                        <option>Chcem vidieť</option>
+                        <option selected>Pozerám</option>
+                        <option>Videl som</option>
+                    </select>
+                </div>
+                <div class="rating">
+                    <span class="stars" role="img" aria-label="4 z 5">★★★★<span class="off">★</span></span><small>4/5</small>
+                </div>
+                <div class="note-field">
+                    <label class="sr-only" for="n2">Poznámka</label>
+                    <input id="n2" type="text" placeholder="Pridať poznámku…">
+                </div>
+                <div class="actions">
+                    <a class="btn btn-small" href="#">Detail</a>
+                    <button class="btn btn-small btn-danger" type="button">✕ Odstrániť</button>
+                </div>
+            </li>
+
+            <li class="movie">
+                <div class="poster" role="img" aria-label="Plagát filmu The Godfather"></div>
+                <div class="info">
+                    <h2>The Godfather <span class="year">(1972)</span></h2>
+                    <ul class="chips"><li class="chip">Krimi</li><li class="chip">Dráma</li></ul>
+                </div>
+                <div class="status">
+                    <label class="sr-only" for="st3">Stav</label>
+                    <select id="st3">
+                        <option selected>Chcem vidieť</option>
+                        <option>Pozerám</option>
+                        <option>Videl som</option>
+                    </select>
+                </div>
+                <div class="rating">
+                    <span class="stars" role="img" aria-label="Nehodnotené"><span class="off">★★★★★</span></span><small>—</small>
+                </div>
+                <div class="note-field">
+                    <label class="sr-only" for="n3">Poznámka</label>
+                    <input id="n3" type="text" placeholder="Pridať poznámku…">
+                </div>
+                <div class="actions">
+                    <a class="btn btn-small" href="#">Detail</a>
+                    <button class="btn btn-small btn-danger" type="button">✕ Odstrániť</button>
+                </div>
+            </li>
+        </ul>
+
+        <nav class="pagination" aria-label="Stránkovanie">
+            <span>Zobrazené 1–3 z 37</span>
+            <ul>
+                <li><a href="#" aria-label="Predchádzajúca">‹</a></li>
+                <li><a href="#" aria-current="page">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">…</a></li>
+                <li><a href="#">13</a></li>
+                <li><a href="#" aria-label="Nasledujúca">›</a></li>
+            </ul>
+        </nav>
+    </section>
+</main>
+
+<footer class="site-footer">
+    <div class="container">
+        <span>© 2026 MovieTracker</span>
+        <ul>
+            <li><a href="#">O projekte</a></li>
+            <li><a href="#">Kontakt</a></li>
+            <li><a href="#">Podmienky použitia</a></li>
+        </ul>
+    </div>
+</footer>
+
+</body>
+</html>
